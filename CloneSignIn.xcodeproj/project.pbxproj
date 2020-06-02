@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,8 @@
 		22622D972484E546005F8068 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22622D952484E546005F8068 /* Main.storyboard */; };
 		22622D992484E54A005F8068 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22622D982484E54A005F8068 /* Assets.xcassets */; };
 		22622D9C2484E54A005F8068 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22622D9A2484E54A005F8068 /* LaunchScreen.storyboard */; };
+		22622DA42484F7D0005F8068 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22622DA32484F7D0005F8068 /* User.swift */; };
+		9F1BA19C2708FD1CF4F063D5 /* Pods_CloneSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D011860D0C6BCA1146E8859B /* Pods_CloneSignIn.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,10 @@
 		22622D982484E54A005F8068 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22622D9B2484E54A005F8068 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22622D9D2484E54A005F8068 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22622DA32484F7D0005F8068 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		246FBCB63836D69253543238 /* Pods-CloneSignIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloneSignIn.release.xcconfig"; path = "Target Support Files/Pods-CloneSignIn/Pods-CloneSignIn.release.xcconfig"; sourceTree = "<group>"; };
+		D011860D0C6BCA1146E8859B /* Pods_CloneSignIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloneSignIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC3EF160BECB188DF3849067 /* Pods-CloneSignIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloneSignIn.debug.xcconfig"; path = "Target Support Files/Pods-CloneSignIn/Pods-CloneSignIn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F1BA19C2708FD1CF4F063D5 /* Pods_CloneSignIn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +49,8 @@
 			children = (
 				22622D8E2484E546005F8068 /* CloneSignIn */,
 				22622D8D2484E546005F8068 /* Products */,
+				86653CAD8641C4529BBAFF3F /* Pods */,
+				DC717C3F160F1040677E319E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +65,7 @@
 		22622D8E2484E546005F8068 /* CloneSignIn */ = {
 			isa = PBXGroup;
 			children = (
+				22622DC5248577C7005F8068 /* Model */,
 				22622D8F2484E546005F8068 /* AppDelegate.swift */,
 				22622D912484E546005F8068 /* SceneDelegate.swift */,
 				22622D932484E546005F8068 /* ViewController.swift */,
@@ -67,6 +77,31 @@
 			path = CloneSignIn;
 			sourceTree = "<group>";
 		};
+		22622DC5248577C7005F8068 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				22622DA32484F7D0005F8068 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		86653CAD8641C4529BBAFF3F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EC3EF160BECB188DF3849067 /* Pods-CloneSignIn.debug.xcconfig */,
+				246FBCB63836D69253543238 /* Pods-CloneSignIn.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DC717C3F160F1040677E319E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D011860D0C6BCA1146E8859B /* Pods_CloneSignIn.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +109,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22622DA02484E54A005F8068 /* Build configuration list for PBXNativeTarget "CloneSignIn" */;
 			buildPhases = (
+				4B450E1F6FE51E36B55B17AE /* [CP] Check Pods Manifest.lock */,
 				22622D882484E546005F8068 /* Sources */,
 				22622D892484E546005F8068 /* Frameworks */,
 				22622D8A2484E546005F8068 /* Resources */,
+				DBA719EE806F33F6CC97FE39 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,11 +170,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4B450E1F6FE51E36B55B17AE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CloneSignIn-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DBA719EE806F33F6CC97FE39 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CloneSignIn/Pods-CloneSignIn-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CloneSignIn/Pods-CloneSignIn-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CloneSignIn/Pods-CloneSignIn-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		22622D882484E546005F8068 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22622DA42484F7D0005F8068 /* User.swift in Sources */,
 				22622D942484E546005F8068 /* ViewController.swift in Sources */,
 				22622D902484E546005F8068 /* AppDelegate.swift in Sources */,
 				22622D922484E546005F8068 /* SceneDelegate.swift in Sources */,
@@ -282,6 +362,7 @@
 		};
 		22622DA12484E54A005F8068 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC3EF160BECB188DF3849067 /* Pods-CloneSignIn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -299,6 +380,7 @@
 		};
 		22622DA22484E54A005F8068 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 246FBCB63836D69253543238 /* Pods-CloneSignIn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
