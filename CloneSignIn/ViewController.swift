@@ -13,13 +13,14 @@ import RxSwift
 import RealmSwift
 import SwiftyJSON
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UITextFieldDelegate {
     
     
     //outlet
     @IBOutlet weak var textFieldEmail:UITextField!
     @IBOutlet weak var textFieldPassword:UITextField!
-    @IBOutlet weak var lblWariningLogin:UILabel!
+    @IBOutlet weak var lblWariningLoginPassword:UILabel!
+    @IBOutlet weak var lblWariningLoginEmail:UILabel!
     @IBOutlet weak var viewUnderTextFieldEmail:UIView!
     @IBOutlet weak var viewUnderTextFieldPassWord:UIView!
     @IBOutlet weak var btnSignIn:UIButton!
@@ -34,19 +35,14 @@ class ViewController: UIViewController {
     @IBAction func doSignIn(_ sender: Any) {
         guard let usermail:String = textFieldEmail.text else {return}
         guard let password:String = textFieldPassword.text else {return}
-        
-        if(usermail == "" || password  == ""){
-            let alert = UIAlertController(title: "Alert", message: "Đăng nhập rỗng", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
         if(!usermail.contains("@gmail.com")){
-            let alert = UIAlertController(title: "Alert", message: "Mail sai cấu trúc", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            self.lblWariningLoginEmail.isHidden = false
+            self.lblWariningLoginEmail.text = "Sai cấu trúc"
         }
-        
+        hiddenLblWarning()
         alamofireRequest()
+        checkPasswordEmtyOrNot()
+        checkEmailEmtyOrNot()
         
     }
     
@@ -77,7 +73,45 @@ class ViewController: UIViewController {
         setUpTextFieldEmailAndPassword()
         drawLineUnderTextField()
         cornerRadius()
-        lblWariningLogin.isHidden = true
+        setUpNavigationBar()
+        hideKeyboardWhenTappedAround()
+        dissMissKeyBoardWhenTapReturn()
+        hiddenLblWarning()
+    }
+    
+    func hiddenLblWarning(){
+        lblWariningLoginPassword.isHidden = true
+        lblWariningLoginEmail.isHidden = true
+    }
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool{
+        self.view.endEditing(true)
+        return true
+    }
+    
+    func dissMissKeyBoardWhenTapReturn(){
+        textFieldEmail.delegate = self
+        textFieldPassword.delegate = self
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+
+    
+
+    
+    func setUpNavigationBar(){
+        
+        navigationController?.navigationBar.barTintColor = UIColor.init(red: 90/255, green: 164/255, blue: 204/255, alpha: 1.0)
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)]
     }
     
     func setUpTextFieldEmailAndPassword(){
@@ -89,7 +123,7 @@ class ViewController: UIViewController {
     }
     
     func cornerRadius(){
-        btnSignIn.layer.cornerRadius = 10
+        btnSignIn.layer.cornerRadius = 5
     }
     
     func alamofireRequest(){
@@ -98,9 +132,15 @@ class ViewController: UIViewController {
             case .success(let value):
                 if let jsonIncludeToken = value as? KeyValue {
                     if let status = jsonIncludeToken["status"] as? Int{
-                        if status != 200{
-                            self.lblWariningLogin.isHidden = false
-                            self.lblWariningLogin.text = "Sai email hoặc mật khẩu"
+                        if status == 200 {
+                            let alert = UIAlertController(title: "Đăng nhập thành công", message: "Bạn đã đăng nhập thành công", preferredStyle: UIAlertController.Style.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                        if status != 200 {
+                            let alert = UIAlertController(title: "Đăng nhập thất bại", message: "Bạn đã đăng nhập thất bại", preferredStyle: UIAlertController.Style.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
                         }
                     }
                     
@@ -114,7 +154,6 @@ class ViewController: UIViewController {
                                             let user = User()
                                             user.name = data["name"] as? String
                                             user.phoneNumber = data["phoneNumber"] as? String
-                                            
                                             
                                             let realm = try! Realm()
                                             try! realm.write{
@@ -134,6 +173,21 @@ class ViewController: UIViewController {
             case .failure(let err):
                 print(err)
             }
+        }
+    }
+    
+    
+    func checkPasswordEmtyOrNot(){
+        if textFieldPassword.text?.count == 0 {
+            self.lblWariningLoginPassword.isHidden = false
+            self.lblWariningLoginPassword.text = "Password chưa được nhập"
+        }
+    }
+    
+    func checkEmailEmtyOrNot(){
+        if textFieldEmail.text?.count == 0 {
+            self.lblWariningLoginEmail.isHidden = false
+            self.lblWariningLoginEmail.text = "Email chưa được nhập"
         }
     }
     
